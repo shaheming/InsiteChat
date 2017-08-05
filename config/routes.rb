@@ -8,5 +8,8 @@ Rails.application.routes.draw do
       post :add
     end
   end
-
+  
+  resources :conversations, only: [:create] do
+    resources :messages, only: [:index, :create,:destroy]
+  end
 end

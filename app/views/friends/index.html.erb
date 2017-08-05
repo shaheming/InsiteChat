@@ -4,9 +4,10 @@
     <thead>
       <tr>
         <th> # </th>
-        <th> name </th>
-        <th> email </th>
-        <th> option </th>
+        <th> Name </th>
+        <th> Email </th>
+        <th> Unread </th>
+        <th> Option </th>
       </tr>
     </thead>
     <tbody>
@@ -15,7 +16,9 @@
         <td> # </td>
         <td> <%= friend.username %> </td>
         <td>  <%= friend.email %> </td>
-        <td> <%= link_to("Delete friend",friend_path(friend),method: :delete,class:"btn btn-danger") %></td>
+        <td> <%= friend.unread(current_user) %>   </td>
+        <td> <%= link_to("Conversation",conversations_path(:sender_id=>current_user.id,:recipient_id=> friend.id),method: :post,class:'btn btn-info') %>
+         <%= link_to("Delete friend",friend_path(friend),method: :delete,class:"btn btn-danger") %></td>
       </tr>
       <% end %>
     </tbody>

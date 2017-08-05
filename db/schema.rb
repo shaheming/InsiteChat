@@ -10,7 +10,14 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170805103845) do
+ActiveRecord::Schema.define(version: 20170805122200) do
+
+  create_table "conversations", force: :cascade do |t|
+    t.datetime "created_at",   null: false
+    t.datetime "updated_at",   null: false
+    t.integer  "sender_id"
+    t.integer  "recipient_id"
+  end
 
   create_table "friend_ships", force: :cascade do |t|
     t.integer  "user_id"
@@ -18,6 +25,15 @@ ActiveRecord::Schema.define(version: 20170805103845) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["user_id", "friend_id"], name: "index_friend_ships_on_user_id_and_friend_id", unique: true
+  end
+
+  create_table "messages", force: :cascade do |t|
+    t.integer  "conversation_id"
+    t.string   "content"
+    t.boolean  "is_read",         default: false
+    t.datetime "created_at",                      null: false
+    t.datetime "updated_at",                      null: false
+    t.integer  "user_id"
   end
 
   create_table "users", force: :cascade do |t|

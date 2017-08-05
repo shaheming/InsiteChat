@@ -14,6 +14,8 @@ class User < ApplicationRecord
 
   has_many :friend_ships
   has_many :friends, :through => :friend_ships
+  has_many :conversation_user_relationships
+  has_many :conversations, :through => :conversation_user_relationships
 
   # To aviod using email as user name
     def self.find_for_database_authentication(warden_conditions)
@@ -36,6 +38,15 @@ class User < ApplicationRecord
       else
         where(username: conditions[:username]).first
       end
+    end
+  end
+  def unread(friend)
+    conversation = Conversation.between(self.id,friend.id).first
+    
+    if !conversation.nil?
+      conversation.messages.where(is_read:false,user_id:friend.id).count
+    else
+      0
     end
   end
 
