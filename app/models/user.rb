@@ -1,14 +1,20 @@
 class User < ApplicationRecord
   devise :database_authenticatable, :registerable,
     :recoverable, :rememberable, :trackable, :validatable,:authentication_keys => [:login]
-
+  
   attr_accessor :login
   validates :username,
     :presence => true,
    :uniqueness => {
     :case_sensitive => false
   } 
+ 
+
   validates_format_of :username, with: /^[a-zA-Z0-9_\.]*$/, :multiline => true
+
+  has_many :friend_ships
+  has_many :friends, :through => :friend_ships
+
   # To aviod using email as user name
     def self.find_for_database_authentication(warden_conditions)
     conditions = warden_conditions.dup

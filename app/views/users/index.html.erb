@@ -1,0 +1,30 @@
+<div class="col-md-12">
+  <h2 class="text-center"> Users List </h2>
+  <table class="table">
+    <thead>
+      <tr>
+        <th> ID </th>
+        <th> Name </th>
+        <th> Email </th>
+        <th> Option </th>
+      </tr>
+    </thead>
+    <tbody>
+      <% @users.each do |user| %>
+      <tr>
+        <td> <%= user.id %> </td>
+        <td> <%= user.username %> </td>
+        <td>  <%= user.email %> </td>
+
+        <td> 
+        <% if  user !=current_user && !current_user.friends.include?(user) %>
+           <%= link_to("Add friend",add_friend_path(user),method: :post,class:"btn btn-default") %>
+        <% end %>
+       
+          
+        </td>
+      </tr>
+      <% end %>
+    </tbody>
+  </table>
+</div>

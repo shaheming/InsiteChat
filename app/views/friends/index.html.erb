@@ -1,0 +1,23 @@
+<div class="col-md-12">
+  <h2 class="text-center"> Frien List </h2>
+  <table class="table">
+    <thead>
+      <tr>
+        <th> # </th>
+        <th> name </th>
+        <th> email </th>
+        <th> option </th>
+      </tr>
+    </thead>
+    <tbody>
+      <% @friends.each do |friend| %>
+      <tr>
+        <td> # </td>
+        <td> <%= friend.username %> </td>
+        <td>  <%= friend.email %> </td>
+        <td> <%= link_to("Delete friend",friend_path(friend),method: :delete,class:"btn btn-danger") %></td>
+      </tr>
+      <% end %>
+    </tbody>
+  </table>
+</div>
