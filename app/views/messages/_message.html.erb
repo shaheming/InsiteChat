@@ -1,16 +1,15 @@
 <% if message.content %>
-<li class="<%= message.user_id == current_user.id ? "right" : "left"%> clearfix" id="message-<%= message.id %>">
-  <span class="chat-img <%= message.user_id == current_user.id ? "pull-right" : "pull-left"%>">
-    <img src="http://placehold.it/50/FA6F57/fff&text=<%= message.user_id == current_user.id ? "M" : "F"%>" alt="User Avatar" class="img-circle">
+<li class="<%= message.user_id == user.id ? "right" : "left"%> clearfix" id="message-<%= message.id %>">
+  <span class="chat-img <%= message.user_id == user.id ? "pull-right" : "pull-left"%>">
+    <img src="http://placehold.it/50/FA6F57/fff&text=<%= message.user_id == user.id ? "M" : "F"%>" alt="User Avatar" class="img-circle">
   </span>
   <div class="chat-body clearfix">
     <div class="header">
-      <% user = User.find(message.user_id)%>
       <strong class="primary-font"><%= user.username %></strong>
       <p>
         <%= message.content %>
-        <% if current_user == user %>
-        <%= link_to("Delete",conversation_message_path(@conversation,message),method: :delete, :remote => true,data:{confirm: "Are you sure?"}) %>
+        <% if user == message.user %>
+        <%= link_to("Delete",conversation_message_path(message.conversation,message),method: :delete, :remote => true,data:{confirm: "Are you sure?"}) %>
         <% end %>
       </p>
     </div>

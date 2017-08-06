@@ -7,25 +7,33 @@
       <div class="panel-body" id="chat-body">
         <ul class="chat">
           <% @messages.each do |message| %>
-          <%= render :partial =>"message",locals:{:message => message} %>
+          <%= render :partial =>"message",locals:{:message => message,:user => current_user} %>
           <% end %>
         </ul>
       </div>
       <div class="panel-footer">
-        <%= form_for [@conversation,Message.new],:remote => true do |f| %>
-        <div class="input-group">
-          <%= f.label :content %>
-          <%= f.text_area :content, class:"form-control input-sm",placeholder: "Type your message here..." %>
+        <%#= form_for [@conversation,Message.new],:remote => true do |f| %>
+<!--         <div class="input-group">
+          <%#= f.label :content %>
+          <%#= f.text_area :content, class:"form-control input-sm",placeholder: "Type your message here..." %>
           <span class="input-group-btn">
-            <%= f.submit "Send",class: "btn btn-warning btn-sm",id: "btn-chat" %>
+            <%#= f.submit "Send",class: "btn btn-warning btn-sm",id: "btn-chat" %>
           </span>
-        </div>
-        <% end %>
+        </div> -->
+        <%# end %>
+        <form class="new_message" >
+          <input name="conversation_id" type="hidden" value="<%= @conversation.id %>">
+          <input name="user_id" type="hidden" value="<%= current_user.id %>">
+          <textarea name="content" class="form-control"></textarea>
+          <span class="input-group-btn">
+           <input  type="submit" class="btn btn-warning btn-sm" id= "btn-chat" value="Send">
+          </span>
+        </form>
       </div>
     </div>
   </div>
 </div>
 <script>
-    var chat = $('.panel-body');
+var chat = $('.panel-body');
 chat.scrollTop(chat.prop("scrollHeight"));
 </script>
