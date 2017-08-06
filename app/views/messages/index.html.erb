@@ -7,31 +7,12 @@
       <div class="panel-body" id="chat-body">
         <ul class="chat">
           <% @messages.each do |message| %>
-          <% if message.content %>
-          <li class="<%= message.user_id == current_user.id ? "right" : "left"%> clearfix" >
-            <span class="chat-img <%= message.user_id == current_user.id ? "pull-right" : "pull-left"%>">
-              <img src="http://placehold.it/50/FA6F57/fff&text=<%= message.user_id == current_user.id ? "M" : "F"%>" alt="User Avatar" class="img-circle">
-            </span>
-            <div class="chat-body clearfix">
-              <div class="header">
-                <% user = User.find(message.user_id)%>
-                <strong class="primary-font"><%= user.username %></strong>
-                <p>
-                  <%= message.content %>
-                  <% if current_user == user %>
-                  <%= link_to("Delete",conversation_message_path(@conversation,message),method: :delete,data:{confirm: "Are you sure?"}) %>
-                  <% end %>
-                </p>
-              </div>
-            </div>
-          </li>
-          <% end %>
-          
+          <%= render :partial =>"message",locals:{:message => message} %>
           <% end %>
         </ul>
       </div>
       <div class="panel-footer">
-        <%= form_for [@conversation,Message.new] do |f| %>
+        <%= form_for [@conversation,Message.new],:remote => true do |f| %>
         <div class="input-group">
           <%= f.label :content %>
           <%= f.text_area :content, class:"form-control input-sm",placeholder: "Type your message here..." %>
@@ -44,3 +25,7 @@
     </div>
   </div>
 </div>
+<script>
+    var chat = $('.panel-body');
+chat.scrollTop(chat.prop("scrollHeight"));
+</script>

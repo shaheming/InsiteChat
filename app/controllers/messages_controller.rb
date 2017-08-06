@@ -20,15 +20,14 @@ class MessagesController < ApplicationController
 
   def create
     @message = @conversation.messages.new(:content=>params[:message][:content],:user_id=>current_user.id)
-
-    if @message.save
-      redirect_to conversation_messages_path(@conversation)
-    end
+    @message.save
+    # if @message.save
+    #   redirect_to conversation_messages_path(@conversation)
+    # end
   end
   def destroy
     @message = Message.find(params[:id])
     @message.destroy
-    redirect_to :back
   end
 
 end

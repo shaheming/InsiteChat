@@ -13,7 +13,7 @@ class ConversationsController < ApplicationController
        friendship.save 
      end
 
-    redirect_to conversation_messages_path(@conversation)
+     redirect_to conversation_messages_path(@conversation)
 
   end
   private

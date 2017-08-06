@@ -1,0 +1,7 @@
+<% if @message.valid? %>
+  $(".chat").append("<%=j render :partial => 'message', :locals => { :message => @message } %>");
+  $("")
+  var chat = $('.panel-body');
+chat.scrollTop(chat.prop("scrollHeight"));
+$('.input-group').find('textarea').val('');
+<% end %>
