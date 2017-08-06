@@ -23,10 +23,13 @@ class MessageBroadcastJob < ApplicationJob
   end
 
   def broadcast_to_recipient(sender,recipient, message)
+
     ActionCable.server.broadcast(
       "conversations-#{recipient.id}",
       message: render_message(message,recipient),
         #friend_list:render_friend_list(message,recipient),
+     sender_id: sender.id,
+     unread_num: recipient.unread(recipient,sender),
      conversation_id: message.conversation_id,
      friend_list: render_friend_list(sender,recipient)
     )
