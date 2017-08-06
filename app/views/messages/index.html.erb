@@ -12,15 +12,6 @@
         </ul>
       </div>
       <div class="panel-footer">
-        <%#= form_for [@conversation,Message.new],:remote => true do |f| %>
-<!--         <div class="input-group">
-          <%#= f.label :content %>
-          <%#= f.text_area :content, class:"form-control input-sm",placeholder: "Type your message here..." %>
-          <span class="input-group-btn">
-            <%#= f.submit "Send",class: "btn btn-warning btn-sm",id: "btn-chat" %>
-          </span>
-        </div> -->
-        <%# end %>
         <form class="new_message" >
           <input name="conversation_id" type="hidden" value="<%= @conversation.id %>">
           <input name="user_id" type="hidden" value="<%= current_user.id %>">

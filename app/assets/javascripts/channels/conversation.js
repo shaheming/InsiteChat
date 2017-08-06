@@ -3,6 +3,7 @@ App.conversation = App.cable.subscriptions.create("ConversationChannel", {
   disconnected: function() {},
   received: function(data) {
     var conversation = $('#chat-body').find('ul').append(data['message']);
+    var friend_list = $('#friend-list').append(data['friend_list']);
     var chat = $('.panel-body');
     chat.scrollTop(chat.prop("scrollHeight"));
   },

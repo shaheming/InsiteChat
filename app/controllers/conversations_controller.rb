@@ -8,11 +8,9 @@ class ConversationsController < ApplicationController
     end
 
      recipient = User.find(params[:recipient_id])
-     if !current_user.friends.include?(recipient)
-       friendship = recipient.friend_ships.new(:friend_id => current_user.id)
-       friendship.save 
-     end
-
+     sender = User.find(params[:sender_id])
+     recipient.add_friend(sender) 
+ 
      redirect_to conversation_messages_path(@conversation)
 
   end

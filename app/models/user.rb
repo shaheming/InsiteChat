@@ -42,11 +42,19 @@ class User < ApplicationRecord
   end
   def unread(recipient,sender)
     conversation = Conversation.between(recipient.id,sender.id).first
-      debugger 
     if !conversation.nil?
       conversation.messages.where(is_read:false,user_id:sender.id).count
     else
       0
+    end
+  end
+  def add_friend(friend)
+    
+     friendship =FriendShip.new(:user_id=>self.id,:friend_id =>friend.id) 
+     if friendship.save
+      return true
+    else
+      return false
     end
   end
 

@@ -4,8 +4,8 @@ class FriendsController < ApplicationController
     @friends = current_user.friends
   end
   def add
-    @friendship = current_user.friend_ships.new(:friend_id => params[:id])
-    if  @friendship.save
+    friend = User.find(params[:id])
+    if  current_user.add_friend(friend)
       redirect_to  :back,notice: "Added friend."
     else
       redirect_to  :back,alert:"Unable to add friend."
