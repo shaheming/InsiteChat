@@ -10,7 +10,7 @@ class User < ApplicationRecord
   } 
  
 
-  validates_format_of :username, with: /^[a-zA-Z0-9_\.]*$/, :multiline => true
+  validates_format_of :username, with: /^[a-zA-Z0-9_\s\.]*$/, :multiline => true
 
   has_many :friend_ships
   has_many :friends, :through => :friend_ships
@@ -40,11 +40,11 @@ class User < ApplicationRecord
       end
     end
   end
-  def unread(friend)
-    conversation = Conversation.between(self.id,friend.id).first
-    
+  def unread(recipient,sender)
+    conversation = Conversation.between(recipient.id,sender.id).first
+     # debugger 
     if !conversation.nil?
-      conversation.messages.where(is_read:false,user_id:friend.id).count
+      conversation.messages.where(is_read:false,user_id:sender.id).count
     else
       0
     end
