@@ -2,7 +2,7 @@ Rails.application.routes.draw do
   get '/users' => "users#index"
  mount ActionCable.server => '/cable'
   devise_for :users
-  root "friends#index"
+  root "users#index"
   resources :friends do
     member do
       post :add

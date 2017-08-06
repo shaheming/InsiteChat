@@ -10,9 +10,7 @@ class MessagesController < ApplicationController
     if current_user.unread(current_user,sender)
       messages = @conversation.messages.where('user_id = ?  and is_read = ?',sender.id,false)
       messages.each do |message|
-        if message.user_id != @conversation.sender.id
           message.update_attribute(:is_read, 'true')
-        end
       end
     end
   end
