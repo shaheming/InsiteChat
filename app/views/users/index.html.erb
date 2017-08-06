@@ -15,12 +15,16 @@
         <td> <%= user.id %> </td>
         <td> <%= user.username %> </td>
         <td>  <%= user.email %> </td>
-
-        <td> 
-        <% if  user !=current_user && !current_user.friends.include?(user) %>
-           <%= link_to("Add friend",add_friend_path(user),method: :post,class:"btn btn-default") %>
-        <% end %>
-       
+        <td>
+          
+          <% if  user !=current_user   %>
+          <%= link_to("Conversation",conversations_path(:sender_id=>current_user.id,:recipient_id=> user.id),method: :post,class:'btn btn-info') %>
+          <% if !current_user.friends.include?(user) %>
+          <%= link_to("Add friend",add_friend_path(user),method: :post,class:"btn btn-default") %>
+          <% end %>
+          
+          <% end %>
+          
           
         </td>
       </tr>

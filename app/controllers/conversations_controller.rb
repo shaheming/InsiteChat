@@ -6,7 +6,15 @@ class ConversationsController < ApplicationController
     else
       @conversation = Conversation.create!(conversation_params)
     end
-     redirect_to conversation_messages_path(@conversation)
+
+     recipient = User.find(params[:recipient_id])
+     if !current_user.friends.include?(recipient)
+       friendship = recipient.friend_ships.new(:friend_id => current_user.id)
+       friendship.save 
+     end
+
+    redirect_to conversation_messages_path(@conversation)
+
   end
   private
   def conversation_params
