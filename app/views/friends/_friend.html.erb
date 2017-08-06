@@ -1,0 +1,8 @@
+<tr>
+  <td> # </td>
+  <td> <%= friend.username %> </td>
+  <td>  <%= friend.email %> </td>
+  <td> <%= friend.unread(user,friend) %>   </td>
+  <td> <%= link_to("Conversation",conversations_path(:sender_id=>user.id,:recipient_id=> friend.id),method: :post,class:'btn btn-info') %>
+  <%= link_to("Delete friend",friend_path(friend),method: :delete,class:"btn btn-danger") %></td>
+</tr>

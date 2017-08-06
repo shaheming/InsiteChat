@@ -42,7 +42,7 @@ class User < ApplicationRecord
   end
   def unread(recipient,sender)
     conversation = Conversation.between(recipient.id,sender.id).first
-     # debugger 
+      debugger 
     if !conversation.nil?
       conversation.messages.where(is_read:false,user_id:sender.id).count
     else
