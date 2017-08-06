@@ -1,4 +1,8 @@
+//= require cable
+//= require_self
+//= require_tree .
 App.conversation = App.cable.subscriptions.create("ConversationChannel", {
+
   connected: function() {},
   disconnected: function() {},
   received: function(data) {
