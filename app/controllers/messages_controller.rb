@@ -6,7 +6,6 @@ class MessagesController < ApplicationController
   end
   def index
     @messages = Conversation.find(params[:conversation_id]).messages
-    # debugger
     sender  = @conversation.sender == current_user ? @conversation.recipient :  @conversation.sender
     if current_user.unread(current_user,sender)
       messages = @conversation.messages.where('user_id = ?  and is_read = ?',sender.id,false)
@@ -21,9 +20,6 @@ class MessagesController < ApplicationController
   def create
     @message = @conversation.messages.new(:content=>params[:message][:content],:user_id=>current_user.id)
     @message.save
-    # if @message.save
-    #   redirect_to conversation_messages_path(@conversation)
-    # end
   end
   def destroy
     @message = Message.find(params[:id])
