@@ -62,6 +62,6 @@ friend_id
 
 -  自动把 A 添加为 B 联系人时，B 实时更新联系人列表 （待完成）
 
-- 部署到网站（尝试参考[文章](https://blog.heroku.com/real_time_rails_implementing_websockets_in_rails_5_with_action_cable) 部署到 heroku 部署上去后没有成功，暂时没有发现问题）
+- 部署到网站（尝试参考[文章](https://blog.heroku.com/real_time_rails_implementing_websockets_in_rails_5_with_action_cable) 部署到 heroku 
 
   ​
